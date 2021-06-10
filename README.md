@@ -4,3 +4,4 @@ The above files are for the ASBMB conference Teaching Science with Big Data work
 
 This activity only uses a small subset from the Top8000 dataset due to time restriction. For those interested in the full Top8000 dataset, this is available at [http://kinemage.biochem.duke.edu/databases/top8000.php](http://kinemage.biochem.duke.edu/databases/top8000.php).
 
+[Download All Files as Zip](VisTop8000.zip)
