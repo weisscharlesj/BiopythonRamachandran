@@ -12,4 +12,5 @@ The goal of this activity is to provide the participant with experience using Py
 This activity only uses a small subset from the Top8000 dataset, included below, due to time restriction. The full dataset has since become unavailable and is replaced by the top2018 dataset. This activity can be used with any collection of quality protein PDB files and does not inherantly require the above datasets.
 
 [Download All Files as Zip](VisTop8000.zip)
+
 [Download Completed Jupyter Notebooks](VisTop8000_Complete.zip)
