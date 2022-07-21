@@ -2,6 +2,8 @@
 
 The above files are for the ASBMB conference Teaching Science with Big Data workshop titled **Visualization of Top 8000’s Protein Dataset**. These materials are released under the [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/).
 
+## [View Completed Activity as Jupyter Book](https://weisscharlesj.github.io/BiopythonRamachandran/)
+
 The goal of this activity is to provide the participant with experience using Python and Jupyter notebooks to process and visualize large amounts of protein structural data. This activity is broken down into three notebooks with the specific goals provided below.
 1. Familiarize participants with Python, Jupyter, plotting data, and using Python functions
 2. Extract information from PDB files and visualize it using Python and matplotlib
