@@ -1,0 +1,1089 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Notebook 2: Introduction to PDB Files and Biopython &#8212; Visualization of Top8000 Protein Dataset</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Notebook 3: Bond Angles and Ramachandran Plots" href="../03Ramachandran/03Ramachandran_Plot_v8.html" />
+    <link rel="prev" title="Notebook 1: Introduction to Jupyter and Python" href="../01PythonJupyter/01Jupyter_Python_Introduction_v7.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Visualization of Top8000 Protein Dataset</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Visualization of Top8000 Protein Dataset
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../00Overview.html">
+   <font color="545AA7">
+    Visualization of Top8000 Protein Dataset
+   </font>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../01PythonJupyter/01Jupyter_Python_Introduction_v7.html">
+   <font color="545AA7">
+    Notebook 1: Introduction to Jupyter and Python
+   </font>
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   <font color="545AA7">
+    Notebook 2: Introduction to PDB Files and Biopython
+   </font>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../03Ramachandran/03Ramachandran_Plot_v8.html">
+   <font color="545AA7">
+    Notebook 3: Bond Angles and Ramachandran Plots
+   </font>
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/VisTop8000_COMPLETE/02Biopython/02Biopython_PDB_Introduction_v7.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/executablebooks/jupyter-book"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FVisTop8000_COMPLETE/02Biopython/02Biopython_PDB_Introduction_v7.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../../_sources/VisTop8000_COMPLETE/02Biopython/02Biopython_PDB_Introduction_v7.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#font-color-545aa7-1-download-a-pdb-file-font">
+   <font color="545AA7">
+    1. Download a PDB File
+   </font>
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#font-color-545aa7-2-pdb-format-and-parsing-font">
+   <font color="545AA7">
+    2. PDB Format and Parsing
+   </font>
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#font-color-f28500-be-sure-to-run-the-following-code-cell-font">
+     <font color="F28500">
+      Be sure to run the following code cell.
+     </font>
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#font-color-545aa7-3-parsing-pdb-files-font">
+   <font color="545AA7">
+    3. Parsing PDB Files
+   </font>
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#font-color-545aa7-4-structure-of-the-data-font">
+   <font color="545AA7">
+    4. Structure of the Data
+   </font>
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#font-color-545aa7-5-examining-amino-acid-frequency-font">
+   <font color="545AA7">
+    5. Examining Amino Acid Frequency
+   </font>
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#font-color-545aa7-a-all-amino-acids-in-protein-font">
+     <font color="545aa7">
+      a. All Amino Acids in Protein
+     </font>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#font-color-f28500-visualization-using-a-countplot-font">
+     <font color="F28500">
+      Visualization Using a countplot()
+     </font>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#font-color-545aa7-b-amino-acids-in-helicies-and-sheets-font">
+     <font color="545aa7">
+      b. Amino Acids in Helicies and Sheets
+     </font>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#font-color-f28500-let-s-now-plot-the-result-font">
+     <font color="F28500">
+      Let’s now plot the result.
+     </font>
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#font-color-545aa7-6-examining-beta-sheets-font">
+   <font color="545AA7">
+    6. Examining
+    <span class="math notranslate nohighlight">
+     \(\beta\)
+    </span>
+    -Sheets
+   </font>
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1><font color = 545AA7> Notebook 2: Introduction to PDB Files and Biopython </font></h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#font-color-545aa7-1-download-a-pdb-file-font">
+   <font color="545AA7">
+    1. Download a PDB File
+   </font>
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#font-color-545aa7-2-pdb-format-and-parsing-font">
+   <font color="545AA7">
+    2. PDB Format and Parsing
+   </font>
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#font-color-f28500-be-sure-to-run-the-following-code-cell-font">
+     <font color="F28500">
+      Be sure to run the following code cell.
+     </font>
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#font-color-545aa7-3-parsing-pdb-files-font">
+   <font color="545AA7">
+    3. Parsing PDB Files
+   </font>
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#font-color-545aa7-4-structure-of-the-data-font">
+   <font color="545AA7">
+    4. Structure of the Data
+   </font>
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#font-color-545aa7-5-examining-amino-acid-frequency-font">
+   <font color="545AA7">
+    5. Examining Amino Acid Frequency
+   </font>
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#font-color-545aa7-a-all-amino-acids-in-protein-font">
+     <font color="545aa7">
+      a. All Amino Acids in Protein
+     </font>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#font-color-f28500-visualization-using-a-countplot-font">
+     <font color="F28500">
+      Visualization Using a countplot()
+     </font>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#font-color-545aa7-b-amino-acids-in-helicies-and-sheets-font">
+     <font color="545aa7">
+      b. Amino Acids in Helicies and Sheets
+     </font>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#font-color-f28500-let-s-now-plot-the-result-font">
+     <font color="F28500">
+      Let’s now plot the result.
+     </font>
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#font-color-545aa7-6-examining-beta-sheets-font">
+   <font color="545AA7">
+    6. Examining
+    <span class="math notranslate nohighlight">
+     \(\beta\)
+    </span>
+    -Sheets
+   </font>
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="font-color-545aa7-notebook-2-introduction-to-pdb-files-and-biopython-font">
+<h1><font color = 545AA7> Notebook 2: Introduction to PDB Files and Biopython </font><a class="headerlink" href="#font-color-545aa7-notebook-2-introduction-to-pdb-files-and-biopython-font" title="Permalink to this headline">#</a></h1>
+<p>For this activity, we will exam the structures of proteins in <strong>PDB (Protein Data Bank) files</strong> using the <strong>biopython</strong> library. The goals of this activity are listed below:</p>
+<ul class="simple">
+<li><p>Examine the structure of a PDB file</p></li>
+<li><p>Use biopython to load PDB files and extract information</p></li>
+<li><p>Visualize the extracted information</p></li>
+</ul>
+<div class="section" id="font-color-545aa7-1-download-a-pdb-file-font">
+<h2><font color = 545AA7> 1. Download a PDB File </font><a class="headerlink" href="#font-color-545aa7-1-download-a-pdb-file-font" title="Permalink to this headline">#</a></h2>
+<p>To  obtain protein structural data, the Protein Data Bank website at <a class="reference external" href="https://www.rcsb.org/">https://www.rcsb.org/</a> provides free access to protein cyrstal structures. To aquire a PDB file, go to this website, find the structure you’re looking for, and downnload it in the <strong>PDB Format</strong>. It is important to move the downloaded file into the folder with this Jupyter notebook. When Jupyter looks for a file, it looks in the same directory/folder as the Jupyter notebook unless told otherwise. For this activity, your data has already beend downloaded.</p>
+<img src="download_PDB.png" width="400"></div>
+<div class="section" id="font-color-545aa7-2-pdb-format-and-parsing-font">
+<h2><font color = 545AA7> 2. PDB Format and Parsing </font><a class="headerlink" href="#font-color-545aa7-2-pdb-format-and-parsing-font" title="Permalink to this headline">#</a></h2>
+<p>While some other bioinformatics file formats online include mainly sequence data, the PDB file format provides an assortmet of information including:</p>
+<ul class="simple">
+<li><p>Amino acid sequence</p></li>
+<li><p>Non-amino acid species</p></li>
+<li><p><em>xyz</em> coordinates of atoms indentified in structure (does not typically include hydrogens)</p></li>
+<li><p>Metadata about the protein (e.g., host specie and enzyme class)</p></li>
+<li><p>Information about helix and sheet secondary structures</p></li>
+</ul>
+<p>PDB files are text files with the data arranged with specific labels and seperated by strictly-delineated <em>position</em> in a line in the file. For more information on PDB file formats, see <a class="reference external" href="https://www.cgl.ucsf.edu/chimera/docs/UsersGuide/tutorials/pdbintro.html">https://www.cgl.ucsf.edu/chimera/docs/UsersGuide/tutorials/pdbintro.html</a>.</p>
+<div class="section" id="font-color-f28500-be-sure-to-run-the-following-code-cell-font">
+<h3><font color = F28500> Be sure to run the following code cell. </font><a class="headerlink" href="#font-color-f28500-be-sure-to-run-the-following-code-cell-font" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">warnings</span>
+<span class="kn">from</span> <span class="nn">Bio</span> <span class="kn">import</span> <span class="n">BiopythonWarning</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">,</span> <span class="n">BiopythonWarning</span><span class="p">)</span>
+
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="kn">import</span> <span class="nn">Bio.PDB</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;frozen importlib._bootstrap&gt;:228: RuntimeWarning: scipy._lib.messagestream.MessageStream size changed, may indicate binary incompatibility. Expected 56 from C header, got 64 from PyObject
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="font-color-545aa7-3-parsing-pdb-files-font">
+<h2><font color = 545AA7> 3. Parsing PDB Files </font><a class="headerlink" href="#font-color-545aa7-3-parsing-pdb-files-font" title="Permalink to this headline">#</a></h2>
+<p>There are multiple ways of <strong>parsing</strong> data (i.e., seperating data into pieces) from the PDB files. In this activity, we will use the biopython library’s PDB reading capabilities. First, we need to import the <strong>PDB module</strong> of the biopython library with the <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">Bio.PDB</span></code> import command.</p>
+<p>To parse the PDB file, we first create a <strong>parser object</strong> using the <code class="docutils literal notranslate"><span class="pre">Bio.PDB.PDBParser()</span></code> function. Like previous functions, we need to include the name of the library/module it is in, so in this case, <code class="docutils literal notranslate"><span class="pre">Bio.PDB.PDBParser()</span></code> means the <code class="docutils literal notranslate"><span class="pre">PDBParser()</span></code> function in the <code class="docutils literal notranslate"><span class="pre">PDB</span></code> module of the <code class="docutils literal notranslate"><span class="pre">Bio</span></code> (biopython) library. Think of this like a directory system of nested folders on your computer (e.g., /User/Documents/Python_Projects).</p>
+<p>We will also want to attach our parser object to a variable using the <code class="docutils literal notranslate"><span class="pre">=</span></code> symbol the same way we attach a number to a variable. Run the following code in a code cell.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">parser</span> <span class="o">=</span> <span class="n">Bio</span><span class="o">.</span><span class="n">PDB</span><span class="o">.</span><span class="n">PDBParser</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Let’s now use the <code class="docutils literal notranslate"><span class="pre">PDBParser().get_structure()</span></code> function to parse a single PDB. By default, <u> any code run in a Jupyter notebook will look in the same directory (i.e., folder) as the Jupyter notebook for the file </u>. We will use the <code class="docutils literal notranslate"><span class="pre">get_structure()</span></code> function as follows. This function requires two inputs: the first is some name you provide in quotes (singel or double) followed by the full name of the file in quotes.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">parser</span><span class="o">.</span><span class="n">get_structure</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;file_name.pdb&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">parser</span> <span class="o">=</span> <span class="n">Bio</span><span class="o">.</span><span class="n">PDB</span><span class="o">.</span><span class="n">PDBParser</span><span class="p">()</span>
+<span class="n">structure</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">get_structure</span><span class="p">(</span><span class="s1">&#39;6x8j&#39;</span><span class="p">,</span> <span class="s1">&#39;6x8j.pdb&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="font-color-545aa7-4-structure-of-the-data-font">
+<h2><font color = 545AA7> 4. Structure of the Data </font><a class="headerlink" href="#font-color-545aa7-4-structure-of-the-data-font" title="Permalink to this headline">#</a></h2>
+<p>The structural data extracted from the PDB by biopython is organized in a heierarchy starting with the <strong>structure</strong> <span class="math notranslate nohighlight">\(\rightarrow\)</span> <strong>model</strong> <span class="math notranslate nohighlight">\(\rightarrow\)</span> <strong>chain</strong> <span class="math notranslate nohighlight">\(\rightarrow\)</span> <strong>residue</strong> <span class="math notranslate nohighlight">\(\rightarrow\)</span> <strong>atom</strong>. The structure is the protein, the model is a particular 3D model of the protein, the chain is a single peptide chain in the protein, the residue is an amino acid residue in the chain, and the atom is each atom within a given chain.</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="text-align:center head"><p>Level</p></th>
+<th class="text-align:left head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-align:center"><p>Structure</p></td>
+<td class="text-align:left"><p>Protein strucutre; may contain multiple models</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:center"><p>Model</p></td>
+<td class="text-align:left"><p>Particular 3D model of the protein</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:center"><p>Chain</p></td>
+<td class="text-align:left"><p>Each pepetide chain in the protein</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:center"><p>Residue</p></td>
+<td class="text-align:left"><p>Amino acid residue in a given chain</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:center"><p>Atom</p></td>
+<td class="text-align:left"><p>Atoms in a particular peptide chain</p></td>
+</tr>
+</tbody>
+</table>
+<p>While PDB files can contain multiple structures of a protein, most only contain one. Even though there is only one model in our data, we will need to access the first (and only) model using indexing. In square brackets <code class="docutils literal notranslate"><span class="pre">[]</span></code> behind the variable, give the number of the item you want to access. In Python indexing, numbering starts with zero, so the first protein model is <code class="docutils literal notranslate"><span class="pre">structure[0]</span></code>. If there were a second, it would be <code class="docutils literal notranslate"><span class="pre">structure[1]</span></code>.</p>
+<p>Using a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop, we can run through your protein model to see how many chains are in it. The code below systematically goes through ever chain in the <code class="docutils literal notranslate"><span class="pre">protein_model</span></code>, assigns in to the variable <code class="docutils literal notranslate"><span class="pre">chain</span></code>, and then prints (i.e., displays on the screen) the information.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">protein_model</span> <span class="o">=</span> <span class="n">structure</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">chain</span> <span class="ow">in</span> <span class="n">protein_model</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">chain</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Chain id=A&gt;
+&lt;Chain id=C&gt;
+&lt;Chain id=B&gt;
+&lt;Chain id=D&gt;
+&lt;Chain id=E&gt;
+&lt;Chain id=F&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>To access a particular chain, use the chain’s <code class="docutils literal notranslate"><span class="pre">id</span></code>. For example, to access Chain A, type <code class="docutils literal notranslate"><span class="pre">protein_model['A']</span></code>.Select the first chain and attach its information to an intuative variable of your choice.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">chain_A</span> <span class="o">=</span> <span class="n">protein_model</span><span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">]</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">chain_A</span><span class="p">[</span><span class="mi">58</span><span class="p">]</span>
+<span class="n">res</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Residue TYR het=  resseq=58 icode= &gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">res</span><span class="o">.</span><span class="n">get_unpacked_list</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;Atom N&gt;,
+ &lt;Atom CA&gt;,
+ &lt;Atom C&gt;,
+ &lt;Atom O&gt;,
+ &lt;Atom CB&gt;,
+ &lt;Atom CG&gt;,
+ &lt;Atom CD1&gt;,
+ &lt;Atom CD2&gt;,
+ &lt;Atom CE1&gt;,
+ &lt;Atom CE2&gt;,
+ &lt;Atom CZ&gt;,
+ &lt;Atom OH&gt;]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="font-color-545aa7-5-examining-amino-acid-frequency-font">
+<h2><font color = 545AA7> 5. Examining Amino Acid Frequency </font><a class="headerlink" href="#font-color-545aa7-5-examining-amino-acid-frequency-font" title="Permalink to this headline">#</a></h2>
+<div class="section" id="font-color-545aa7-a-all-amino-acids-in-protein-font">
+<h3><Font color = 545aa7> a. All Amino Acids in Protein </font><a class="headerlink" href="#font-color-545aa7-a-all-amino-acids-in-protein-font" title="Permalink to this headline">#</a></h3>
+<p>Next, we will look at and visualize the amino acid residue distribution in our protein. Below is code that you can run that iterates through the peptides and adds each amino acid residue identity to a list called <code class="docutils literal notranslate"><span class="pre">amino_acids</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_aa</span><span class="p">(</span><span class="n">file</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Accepts a PDB files name (string) and returns a list of residues</span>
+<span class="sd">    that occur in a peptide.</span>
+<span class="sd">    </span>
+<span class="sd">     &gt;&gt;&gt; (&#39;1abc.pdb&#39;) -&gt; [&#39;GLY&#39;, &#39;ALA&#39;, &#39;LYS&#39;]</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="n">amino_acids</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># empty list to add the amino acids to</span>
+
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">Bio</span><span class="o">.</span><span class="n">PDB</span><span class="o">.</span><span class="n">PDBParser</span><span class="p">()</span>
+    <span class="n">structure</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">get_structure</span><span class="p">(</span><span class="s1">&#39;6x8j&#39;</span><span class="p">,</span> <span class="s1">&#39;6x8j.pdb&#39;</span><span class="p">)</span>
+    <span class="n">pp</span> <span class="o">=</span> <span class="n">Bio</span><span class="o">.</span><span class="n">PDB</span><span class="o">.</span><span class="n">PPBuilder</span><span class="p">()</span><span class="o">.</span><span class="n">build_peptides</span><span class="p">(</span><span class="n">structure</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+    <span class="c1"># go through each chain and residue and append the amino acid identity to the list</span>
+    <span class="k">for</span> <span class="n">chain</span> <span class="ow">in</span> <span class="n">pp</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">res</span> <span class="ow">in</span> <span class="n">chain</span><span class="p">:</span>
+            <span class="n">res_name</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">get_resname</span><span class="p">()</span>
+            <span class="n">amino_acids</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">res_name</span><span class="p">)</span>
+            
+    <span class="k">return</span> <span class="n">amino_acids</span> 
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">amino_acids</span> <span class="o">=</span> <span class="n">get_aa</span><span class="p">(</span><span class="s1">&#39;6x8j.pdb&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="font-color-f28500-visualization-using-a-countplot-font">
+<h3><font color = F28500> Visualization Using a countplot() </font><a class="headerlink" href="#font-color-f28500-visualization-using-a-countplot-font" title="Permalink to this headline">#</a></h3>
+<p>Next, we will visualize the above data using the <strong>seaborn</strong> plotting library’s <code class="docutils literal notranslate"><span class="pre">sns.coutplot()</span></code> function. This plotting function takes in the data and tallies the number of occurances of each value in the data. In this case, the data are stored in the variable <code class="docutils literal notranslate"><span class="pre">sense</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">countplot</span><span class="p">(</span><span class="n">x</span><span class="o">=&lt;</span><span class="n">data</span><span class="o">&gt;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">countplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">amino_acids</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;C00&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/02Biopython_PDB_Introduction_v7_17_0.png" src="../../_images/02Biopython_PDB_Introduction_v7_17_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="font-color-545aa7-b-amino-acids-in-helicies-and-sheets-font">
+<h3><Font color = 545aa7> b. Amino Acids in Helicies and Sheets </font><a class="headerlink" href="#font-color-545aa7-b-amino-acids-in-helicies-and-sheets-font" title="Permalink to this headline">#</a></h3>
+<p>Next, we will harvest lists of amino acids residues that occur at the start of a helix or sheet. <em>Note: not all helicies are <span class="math notranslate nohighlight">\(\alpha\)</span>-helicies as there are a fare number of <span class="math notranslate nohighlight">\(3_{10}\)</span>-helices in this dataset as well.</em></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_helix_start</span><span class="p">(</span><span class="n">file</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Accepts a PDB files name (string) and returns a list of residues</span>
+<span class="sd">    that occur at the start of a helix.</span>
+<span class="sd">    </span>
+<span class="sd">     &gt;&gt;&gt; (&#39;1abc.pdb&#39;) -&gt; [&#39;GLY&#39;, &#39;ALA&#39;, &#39;LYS&#39;]</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    
+    <span class="n">AA_list</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;HELIX&#39;</span><span class="p">):</span>
+                <span class="n">AA_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="mi">15</span><span class="p">:</span><span class="mi">18</span><span class="p">])</span>
+    
+    <span class="k">return</span> <span class="n">AA_list</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_sheet_start</span><span class="p">(</span><span class="n">file</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Accepts a PDB files name (string) and returns a list of residues</span>
+<span class="sd">    that occur at the start of a sheet.</span>
+<span class="sd">    </span>
+<span class="sd">     &gt;&gt;&gt; (&#39;1abc.pdb&#39;) -&gt; [&#39;GLY&#39;, &#39;ALA&#39;, &#39;LYS&#39;]</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    
+    <span class="n">AA_list</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;SHEET&#39;</span><span class="p">):</span>
+                <span class="n">AA_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="mi">17</span><span class="p">:</span><span class="mi">20</span><span class="p">])</span>
+    
+    
+    <span class="k">return</span> <span class="n">AA_list</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now that we have the fuctions created, instead of just running them on a single PDB file, we will have Python run them <u>on an entire folder of PDB files</u>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">path</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">())</span>
+<span class="n">top80</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s1">&#39;Top80&#39;</span><span class="p">)</span>
+
+<span class="n">helix_start</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">sheet_start</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">general</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">top80</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">file</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;pdb&#39;</span><span class="p">):</span>
+        <span class="n">helix_start</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">get_helix_start</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">top80</span><span class="p">,</span><span class="n">file</span><span class="p">)))</span>
+        <span class="n">sheet_start</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">get_sheet_start</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">top80</span><span class="p">,</span><span class="n">file</span><span class="p">)))</span>
+        <span class="n">general</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">get_aa</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">top80</span><span class="p">,</span><span class="n">file</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="font-color-f28500-let-s-now-plot-the-result-font">
+<h3><font color = F28500> Let’s now plot the result. </font><a class="headerlink" href="#font-color-f28500-let-s-now-plot-the-result-font" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">countplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">helix_start</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">90</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/02Biopython_PDB_Introduction_v7_24_0.png" src="../../_images/02Biopython_PDB_Introduction_v7_24_0.png" />
+</div>
+</div>
+<p>We can combine the two lists of amino acids and plot them in the same plot to better see how the occurance of the amino acids appear at the start of different secondary structures.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="c1">#df_aa = pd.DataFrame([general, len(general) *[&#39;general&#39;]]).transpose()</span>
+<span class="n">df_hel</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span><span class="n">helix_start</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">helix_start</span><span class="p">)</span> <span class="o">*</span><span class="p">[</span><span class="s1">&#39;helix_start&#39;</span><span class="p">]])</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span>
+<span class="n">df_beta</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span><span class="n">sheet_start</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">sheet_start</span><span class="p">)</span> <span class="o">*</span><span class="p">[</span><span class="s1">&#39;sheet_start&#39;</span><span class="p">]])</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">((</span><span class="n">df_hel</span><span class="p">,</span> <span class="n">df_beta</span><span class="p">))</span>
+<span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;amino_acid&#39;</span><span class="p">,</span> <span class="s1">&#39;location&#39;</span><span class="p">]</span>
+
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>amino_acid</th>
+      <th>location</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>SER</td>
+      <td>helix_start</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>GLY</td>
+      <td>helix_start</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>ASN</td>
+      <td>helix_start</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>THR</td>
+      <td>helix_start</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>ILE</td>
+      <td>helix_start</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>1726</th>
+      <td>THR</td>
+      <td>sheet_start</td>
+    </tr>
+    <tr>
+      <th>1727</th>
+      <td>VAL</td>
+      <td>sheet_start</td>
+    </tr>
+    <tr>
+      <th>1728</th>
+      <td>GLU</td>
+      <td>sheet_start</td>
+    </tr>
+    <tr>
+      <th>1729</th>
+      <td>SER</td>
+      <td>sheet_start</td>
+    </tr>
+    <tr>
+      <th>1730</th>
+      <td>PHE</td>
+      <td>sheet_start</td>
+    </tr>
+  </tbody>
+</table>
+<p>3279 rows × 2 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">countplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;amino_acid&#39;</span><span class="p">],</span> <span class="n">hue</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;location&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/02Biopython_PDB_Introduction_v7_27_0.png" src="../../_images/02Biopython_PDB_Introduction_v7_27_0.png" />
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="font-color-545aa7-6-examining-beta-sheets-font">
+<h2><font color = 545AA7> 6. Examining <span class="math notranslate nohighlight">\(\beta\)</span>-Sheets </font><a class="headerlink" href="#font-color-545aa7-6-examining-beta-sheets-font" title="Permalink to this headline">#</a></h2>
+<p>The <span class="math notranslate nohighlight">\(\beta\)</span>-sheets in proteins consist of amino acid strands that may or may not be adjacent to each other in a peptide strand, and the adjacent strands in a <span class="math notranslate nohighlight">\(\beta\)</span>-sheet may be parallel or anti-parallel. PDB files contain information as to the direction of the strands by marking a segment of a <span class="math notranslate nohighlight">\(\beta\)</span>-sheet as <code class="docutils literal notranslate"><span class="pre">0</span></code> if is is the first segment of a sheet, <code class="docutils literal notranslate"><span class="pre">1</span></code> if a segment is parallel with the previous segment in the sheet, and <code class="docutils literal notranslate"><span class="pre">-1</span></code> is a segment is anti-parallel with a previous segment of a <span class="math notranslate nohighlight">\(\beta\)</span>-sheet.</p>
+<img src="5CPA_public_domain_image.png" width="300"><p>The following code creates a function called <code class="docutils literal notranslate"><span class="pre">get_sheet_direction()</span></code> to harvest the relationship of each strand with the previous one in the <span class="math notranslate nohighlight">\(\beta\)</span>-sheets. The next code block</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_sheet_direction</span><span class="p">(</span><span class="n">file</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Accepts a PDB files name (string) and returns a list</span>
+<span class="sd">    of values indicating if a strand starts a beta sheet (0),</span>
+<span class="sd">    strand is parallel to the previous strand (1), or is</span>
+<span class="sd">    anti-parallel to the previous strand (-1).</span>
+<span class="sd">    </span>
+<span class="sd">     &gt;&gt;&gt; (&#39;1abc.pdb&#39;) -&gt; [0, 1, 1, 1, -1]</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    
+    <span class="n">structure_list</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;SHEET&#39;</span><span class="p">):</span>
+                <span class="n">sense</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">line</span><span class="p">[</span><span class="mi">38</span><span class="p">:</span><span class="mi">40</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+                <span class="n">structure_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sense</span><span class="p">)</span>
+    
+    
+    <span class="k">return</span> <span class="n">structure_list</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">current_directory</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()[:</span><span class="o">-</span><span class="mi">11</span><span class="p">]</span>
+<span class="n">top80</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">current_directory</span><span class="p">,</span> <span class="s1">&#39;Top80&#39;</span><span class="p">)</span>
+
+<span class="n">sense</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">top80</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">file</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;pdb&#39;</span><span class="p">):</span>
+        <span class="n">sense</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">get_sheet_direction</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">top80</span><span class="p">,</span><span class="n">file</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">countplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">sense</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:ylabel=&#39;count&#39;&gt;
+</pre></div>
+</div>
+<img alt="../../_images/02Biopython_PDB_Introduction_v7_33_1.png" src="../../_images/02Biopython_PDB_Introduction_v7_33_1.png" />
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./VisTop8000_COMPLETE/02Biopython"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="../01PythonJupyter/01Jupyter_Python_Introduction_v7.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><font color = 545AA7> Notebook 1: Introduction to Jupyter and Python </font></p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="../03Ramachandran/03Ramachandran_Plot_v8.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><font color = 545AA7> Notebook 3: Bond Angles and Ramachandran Plots </font></p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Charles J. Weiss<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

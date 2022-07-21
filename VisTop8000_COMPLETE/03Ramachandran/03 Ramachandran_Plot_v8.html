@@ -1,0 +1,1209 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bond Angles and Ramachandran Plots &#8212; Visualization of Top8000 Protein Dataset</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="prev" title="Introduction to Jupyter and Python" href="../01PythonJupyter/01%20Jupyter_Python_Introduction_v7.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Visualization of Top8000 Protein Dataset</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../README.html">
+                    Visualization of Top8000 Protein Dataset
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../01PythonJupyter/01%20Jupyter_Python_Introduction_v7.html">
+   <font color="545AA7">
+    Introduction to Jupyter and Python
+   </font>
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   <font color="545AA7">
+    Bond Angles and Ramachandran Plots
+   </font>
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/VisTop8000_COMPLETE/03Ramachandran/03 Ramachandran_Plot_v8.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/executablebooks/jupyter-book"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FVisTop8000_COMPLETE/03Ramachandran/03 Ramachandran_Plot_v8.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../../_sources/VisTop8000_COMPLETE/03Ramachandran/03 Ramachandran_Plot_v8.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#font-color-f28500-big-question-what-are-the-trends-in-bond-angles-in-proteins-font">
+   <font color="F28500">
+    Big question: What are the trends in bond angles in proteins?
+   </font>
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#font-color-545aa7-1-measure-single-peptide-angles-font">
+   <font color="545AA7">
+    1. Measure Single Peptide Angles
+   </font>
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#font-color-f28500-be-sure-to-run-this-code-cell-font">
+     <font color="F28500">
+      Be sure to run this code cell!
+     </font>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#font-color-f28500-practice-find-angle-in-degrees-font">
+     <font color="F28500">
+      Practice: Find Angle in Degrees
+     </font>
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#font-color-545aa7-2-examine-distributions-of-angles-font">
+   <font color="545AA7">
+    2. Examine Distributions of Angles
+   </font>
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#font-color-f28500-run-the-pre-written-code-in-the-following-cell-font">
+     <font color="F28500">
+      Run the pre-written code in the following cell.
+     </font>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#font-color-f28500-practice-plot-omega-angle-distribution-font">
+     <font color="F28500">
+      Practice: Plot Omega Angle Distribution
+     </font>
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#font-color-545aa7-3-ramachandran-plots-from-single-protein-font">
+   <font color="545AA7">
+    3. Ramachandran Plots from Single Protein
+   </font>
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#font-color-545aa7-4-ramachandran-plots-from-multiple-top8000-proteins-font">
+   <font color="545AA7">
+    4. Ramachandran Plots from Multiple Top8000 Proteins
+   </font>
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#font-color-545aa7-other-plotting-representations-font">
+     <font color="545AA7">
+      Other Plotting Representations
+     </font>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#font-color-f28500-practice-plotting-ramachandrans-plots-with-secondary-structure-font">
+     <font color="F28500">
+      Practice: Plotting Ramachandrans Plots with Secondary Structure
+     </font>
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1><font color = 545AA7> Bond Angles and Ramachandran Plots </font></h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#font-color-f28500-big-question-what-are-the-trends-in-bond-angles-in-proteins-font">
+   <font color="F28500">
+    Big question: What are the trends in bond angles in proteins?
+   </font>
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#font-color-545aa7-1-measure-single-peptide-angles-font">
+   <font color="545AA7">
+    1. Measure Single Peptide Angles
+   </font>
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#font-color-f28500-be-sure-to-run-this-code-cell-font">
+     <font color="F28500">
+      Be sure to run this code cell!
+     </font>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#font-color-f28500-practice-find-angle-in-degrees-font">
+     <font color="F28500">
+      Practice: Find Angle in Degrees
+     </font>
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#font-color-545aa7-2-examine-distributions-of-angles-font">
+   <font color="545AA7">
+    2. Examine Distributions of Angles
+   </font>
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#font-color-f28500-run-the-pre-written-code-in-the-following-cell-font">
+     <font color="F28500">
+      Run the pre-written code in the following cell.
+     </font>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#font-color-f28500-practice-plot-omega-angle-distribution-font">
+     <font color="F28500">
+      Practice: Plot Omega Angle Distribution
+     </font>
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#font-color-545aa7-3-ramachandran-plots-from-single-protein-font">
+   <font color="545AA7">
+    3. Ramachandran Plots from Single Protein
+   </font>
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#font-color-545aa7-4-ramachandran-plots-from-multiple-top8000-proteins-font">
+   <font color="545AA7">
+    4. Ramachandran Plots from Multiple Top8000 Proteins
+   </font>
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#font-color-545aa7-other-plotting-representations-font">
+     <font color="545AA7">
+      Other Plotting Representations
+     </font>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#font-color-f28500-practice-plotting-ramachandrans-plots-with-secondary-structure-font">
+     <font color="F28500">
+      Practice: Plotting Ramachandrans Plots with Secondary Structure
+     </font>
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="font-color-545aa7-bond-angles-and-ramachandran-plots-font">
+<h1><font color = 545AA7> Bond Angles and Ramachandran Plots </font><a class="headerlink" href="#font-color-545aa7-bond-angles-and-ramachandran-plots-font" title="Permalink to this headline">#</a></h1>
+<p>In this Jupyter notebook, you will be introduced to measuring the <strong>angles</strong> and <strong>dihedral angles</strong> along the backbond of peptide chains. The goals of this notebook are to:</p>
+<ul class="simple">
+<li><p>Measure angles and dihedral angles using biopython</p></li>
+<li><p>Examine angle distributions using histogram plots</p></li>
+<li><p>Generate Ramachandran plots by multiple plotting methods</p></li>
+</ul>
+<p><strong>Dihedral angles</strong> are torsional angles formed by four adjacent atoms. There are three types of dihedral angles along the peptide backbond designated wiht phi (<span class="math notranslate nohighlight">\(\phi\)</span>), psi (<span class="math notranslate nohighlight">\(\psi\)</span>), and omega (<span class="math notranslate nohighlight">\(\omega\)</span>) as shown below. These angles typically fall within specific ranges due to steric repulsion and bond order. In this notebook, we will explore these typical ranges.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="n">Image</span><span class="p">(</span><span class="s2">&quot;tripeptide.png&quot;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">400</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/03 Ramachandran_Plot_v8_1_0.png" src="../../_images/03 Ramachandran_Plot_v8_1_0.png" />
+</div>
+</div>
+<div class="section" id="font-color-f28500-big-question-what-are-the-trends-in-bond-angles-in-proteins-font">
+<h2><font color = F28500> Big question: What are the trends in bond angles in proteins? </font><a class="headerlink" href="#font-color-f28500-big-question-what-are-the-trends-in-bond-angles-in-proteins-font" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">Bio.PDB</span>
+<span class="kn">from</span> <span class="nn">Bio.PDB.vectors</span> <span class="kn">import</span> <span class="n">calc_dihedral</span><span class="p">,</span> <span class="n">calc_angle</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="kn">from</span> <span class="nn">Bio</span> <span class="kn">import</span> <span class="n">BiopythonWarning</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">,</span> <span class="n">BiopythonWarning</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="font-color-545aa7-1-measure-single-peptide-angles-font">
+<h2><font color = 545AA7> 1. Measure Single Peptide Angles </font><a class="headerlink" href="#font-color-545aa7-1-measure-single-peptide-angles-font" title="Permalink to this headline">#</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">Bio.PDB.vectors</span></code> module of biopython contains two functions called <code class="docutils literal notranslate"><span class="pre">calc_angle()</span></code> and <code class="docutils literal notranslate"><span class="pre">calc_dihedral()</span></code> for calculating conventional angles or dihedral angles, respecitely, along the backbond of a peptide. These function take the vector coordinates (xyz) of the three or four atoms that define the angle or dihedral angle.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">calc_angle</span><span class="p">(</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">vector</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">vector</span><span class="o">&gt;</span><span class="p">)</span>
+
+<span class="n">calc_dihedral</span><span class="p">(</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">vector</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">vector</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">vector</span><span class="o">&gt;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The vectors can be otained from the residues using the <code class="docutils literal notranslate"><span class="pre">get_vector()</span></code> function.</p>
+<p>For example, let’s say we want to know the C-N-C<span class="math notranslate nohighlight">\(_\alpha\)</span> angle. The first block of code loads a PDB file and grabs the first amino acid residue of the first chain of the 6x8j.pdb structure.</p>
+<div class="section" id="font-color-f28500-be-sure-to-run-this-code-cell-font">
+<h3><font color = F28500> Be sure to run this code cell! </font><a class="headerlink" href="#font-color-f28500-be-sure-to-run-this-code-cell-font" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">parser</span> <span class="o">=</span> <span class="n">Bio</span><span class="o">.</span><span class="n">PDB</span><span class="o">.</span><span class="n">PDBParser</span><span class="p">()</span>
+<span class="n">structure</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">get_structure</span><span class="p">(</span><span class="s1">&#39;6x8j&#39;</span><span class="p">,</span> <span class="s1">&#39;6x8j.pdb&#39;</span><span class="p">)</span>
+
+<span class="n">chain_A</span> <span class="o">=</span> <span class="n">structure</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;A&#39;</span><span class="p">]</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">chain_A</span><span class="p">[</span><span class="mi">58</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Next, we will obtain the coordinate vectors for the carbon, nitrogen, and <span class="math notranslate nohighlight">\(\alpha\)</span>-carbon of an amino acid residue and attach them to variables <code class="docutils literal notranslate"><span class="pre">N</span></code>, <code class="docutils literal notranslate"><span class="pre">CA</span></code>, and <code class="docutils literal notranslate"><span class="pre">C</span></code>, respectively. This is done by identifying the specific atom and using the <code class="docutils literal notranslate"><span class="pre">get_vector()</span></code> function as described in the previous Jupyter notebook.</p>
+<p>Finally, these three vectors are fed into the <code class="docutils literal notranslate"><span class="pre">calc_angle()</span></code> function which returns the angle in radians.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">C</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="s1">&#39;C&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get_vector</span><span class="p">()</span>
+<span class="n">N</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="s1">&#39;N&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get_vector</span><span class="p">()</span>
+<span class="n">CA</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="s1">&#39;CA&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get_vector</span><span class="p">()</span>
+
+<span class="n">ang</span> <span class="o">=</span> <span class="n">calc_angle</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">CA</span><span class="p">,</span> <span class="n">C</span><span class="p">)</span>
+<span class="n">ang</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.9625051493089707
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="font-color-f28500-practice-find-angle-in-degrees-font">
+<h3><font color = F28500> Practice: Find Angle in Degrees </font><a class="headerlink" href="#font-color-f28500-practice-find-angle-in-degrees-font" title="Permalink to this headline">#</a></h3>
+<p>Copy and paste the code from the above code cell and modify it to find the angle of the C<span class="math notranslate nohighlight">\(_\alpha\)</span>-C-O bond. The oxygen in the aminoacid residue is designated by <code class="docutils literal notranslate"><span class="pre">['O']</span></code>.</p>
+<p>If you have time, convert the output from radiants <span class="math notranslate nohighlight">\(\rightarrow\)</span> degrees.</p>
+<div class="math notranslate nohighlight">
+\[ degrees = radians \times \frac{180}{\pi} \]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">C</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="s1">&#39;C&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get_vector</span><span class="p">()</span>
+<span class="n">CA</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="s1">&#39;CA&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get_vector</span><span class="p">()</span>
+<span class="n">O</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="s1">&#39;O&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get_vector</span><span class="p">()</span>
+
+<span class="n">ang</span> <span class="o">=</span> <span class="n">calc_angle</span><span class="p">(</span><span class="n">CA</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">O</span><span class="p">)</span>
+<span class="n">ang</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.086180584850502
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ang</span> <span class="o">*</span> <span class="p">(</span><span class="mi">180</span> <span class="o">/</span> <span class="mf">3.14</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>119.58996983219437
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="font-color-545aa7-2-examine-distributions-of-angles-font">
+<h2><font color = 545AA7> 2. Examine Distributions of Angles </font><a class="headerlink" href="#font-color-545aa7-2-examine-distributions-of-angles-font" title="Permalink to this headline">#</a></h2>
+<p>Let’s now examine the distribution of the omega (<span class="math notranslate nohighlight">\(\omega\)</span>) bond angles using a histogram plot. In the code cell below, there is code that defines the Python function <code class="docutils literal notranslate"><span class="pre">get_omega()</span></code> you can use to measure all the omega dihedral angles.</p>
+<div class="section" id="font-color-f28500-run-the-pre-written-code-in-the-following-cell-font">
+<h3><font color = F28500> Run the pre-written code in the following cell. </font><a class="headerlink" href="#font-color-f28500-run-the-pre-written-code-in-the-following-cell-font" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Run this cell to define a function you can use in subsequent cells</span>
+
+<span class="k">def</span> <span class="nf">get_abs_omega</span><span class="p">(</span><span class="n">file</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Return list of absolute value omega dihedral angles in radians&quot;&quot;&quot;</span>  
+    <span class="n">omega_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">Bio</span><span class="o">.</span><span class="n">PDB</span><span class="o">.</span><span class="n">PDBParser</span><span class="p">()</span>
+    <span class="n">structure</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">get_structure</span><span class="p">(</span><span class="s1">&#39;protein&#39;</span><span class="p">,</span> <span class="n">file</span><span class="p">)</span>
+    <span class="n">pp</span> <span class="o">=</span> <span class="n">Bio</span><span class="o">.</span><span class="n">PDB</span><span class="o">.</span><span class="n">PPBuilder</span><span class="p">()</span><span class="o">.</span><span class="n">build_peptides</span><span class="p">(</span><span class="n">structure</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">for</span> <span class="n">chain</span> <span class="ow">in</span> <span class="n">pp</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">res</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">chain</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="c1"># get vectors for this peptide and the N from the subsequent peptide</span>
+                <span class="n">CA</span> <span class="o">=</span> <span class="n">chain</span><span class="p">[</span><span class="n">res</span><span class="p">][</span><span class="s1">&#39;CA&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get_vector</span><span class="p">()</span>
+                <span class="n">C</span> <span class="o">=</span> <span class="n">chain</span><span class="p">[</span><span class="n">res</span><span class="p">][</span><span class="s1">&#39;C&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get_vector</span><span class="p">()</span>
+                <span class="n">N_next</span> <span class="o">=</span> <span class="n">chain</span><span class="p">[</span><span class="n">res</span> <span class="o">+</span> <span class="mi">1</span><span class="p">][</span><span class="s1">&#39;N&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get_vector</span><span class="p">()</span>
+                <span class="n">C_next</span> <span class="o">=</span> <span class="n">chain</span><span class="p">[</span><span class="n">res</span> <span class="o">+</span> <span class="mi">1</span><span class="p">][</span><span class="s1">&#39;CA&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get_vector</span><span class="p">()</span>
+                <span class="n">omega</span> <span class="o">=</span> <span class="n">calc_dihedral</span><span class="p">(</span><span class="n">CA</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">N_next</span><span class="p">,</span> <span class="n">C_next</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">180</span> <span class="o">/</span> <span class="mf">3.14159</span><span class="p">)</span>
+                <span class="n">omega_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">omega</span><span class="p">))</span>
+            <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+                <span class="k">continue</span>
+    <span class="k">return</span> <span class="n">omega_list</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now you will use the function in the following cell. Place the name of a PDB file in quotes inside the parentheses, and the function will return a list of omega dihedral angles in degrees.</p>
+<p>Example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">get_abs_omega</span><span class="p">(</span><span class="s1">&#39;5grt.pdb&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="font-color-f28500-practice-plot-omega-angle-distribution-font">
+<h3><font color = F28500> Practice: Plot Omega Angle Distribution </font><a class="headerlink" href="#font-color-f28500-practice-plot-omega-angle-distribution-font" title="Permalink to this headline">#</a></h3>
+<ol class="simple">
+<li><p>Run the <code class="docutils literal notranslate"><span class="pre">get_abs_omega()</span></code> function below for the <strong>6x8j.pdb</strong> protein. You will also want to assign this list of angles to a variable for later use.</p></li>
+<li><p>Plot the distribution of omega angles using the <code class="docutils literal notranslate"><span class="pre">plt.hist()</span></code> histogram plot function. See the first Jupyter notebook if you need review.</p></li>
+<li><p>What do you notice about the distribution? What is the strucutral reason for this? Write you answer in a markdown cell below. <em>Hint: the omega angle is centered on the peptide amide bond.</em></p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">omega</span> <span class="o">=</span> <span class="n">get_abs_omega</span><span class="p">(</span><span class="s1">&#39;6x8j.pdb&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">omega</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/03 Ramachandran_Plot_v8_16_0.png" src="../../_images/03 Ramachandran_Plot_v8_16_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">omega</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="n">path</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">())</span>
+<span class="n">top80</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s1">&#39;Top80&#39;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">top80</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">file</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;pdb&#39;</span><span class="p">):</span>
+        <span class="n">omega</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">get_abs_omega</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">top80</span><span class="p">,</span><span class="n">file</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">omega</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/03 Ramachandran_Plot_v8_18_0.png" src="../../_images/03 Ramachandran_Plot_v8_18_0.png" />
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="font-color-545aa7-3-ramachandran-plots-from-single-protein-font">
+<h2><font color = 545AA7> 3. Ramachandran Plots from Single Protein </font><a class="headerlink" href="#font-color-545aa7-3-ramachandran-plots-from-single-protein-font" title="Permalink to this headline">#</a></h2>
+<p>A <strong>Ramachandran plot</strong> is a 2D plot of the psi (<span class="math notranslate nohighlight">\(\psi\)</span>) versus the phi (<span class="math notranslate nohighlight">\(phi\)</span>) dihedral angles. Below is a function that takes the file name of a PDB file and returns two lists: a list of phi and and list of psi angles.</p>
+<p>e.g.,  <code class="docutils literal notranslate"><span class="pre">ramachandran('1abc.pdb')</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">[phi],</span> <span class="pre">[psi]</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">ramachandran</span><span class="p">(</span><span class="n">PDB</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Accepts a PDB file name (string) and returns two lists of phi </span>
+<span class="sd">    and psi angles, respectively.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">Bio</span><span class="o">.</span><span class="n">PDB</span><span class="o">.</span><span class="n">PDBParser</span><span class="p">()</span>
+    <span class="n">structure</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">get_structure</span><span class="p">(</span><span class="s1">&#39;protein&#39;</span><span class="p">,</span> <span class="n">PDB</span><span class="p">)</span>
+    <span class="n">polypeptide</span> <span class="o">=</span> <span class="n">Bio</span><span class="o">.</span><span class="n">PDB</span><span class="o">.</span><span class="n">PPBuilder</span><span class="p">()</span><span class="o">.</span><span class="n">build_peptides</span><span class="p">(</span><span class="n">structure</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    
+    <span class="n">phi</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">psi</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">strand</span> <span class="ow">in</span> <span class="n">polypeptide</span><span class="p">:</span>
+        <span class="n">phipsi</span> <span class="o">=</span> <span class="n">strand</span><span class="o">.</span><span class="n">get_phi_psi_list</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">point</span> <span class="ow">in</span> <span class="n">phipsi</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">phi_point</span> <span class="o">=</span> <span class="n">point</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="mi">180</span> <span class="o">/</span> <span class="mf">3.14159</span><span class="p">)</span>
+                <span class="n">psi_point</span> <span class="o">=</span> <span class="n">point</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="mi">180</span> <span class="o">/</span> <span class="mf">3.14159</span><span class="p">)</span>
+                <span class="n">phi</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">phi_point</span><span class="p">)</span>
+                <span class="n">psi</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">psi_point</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+                <span class="k">pass</span>
+    
+    <span class="k">return</span> <span class="n">phi</span><span class="p">,</span> <span class="n">psi</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s run the <code class="docutils literal notranslate"><span class="pre">ramachandran</span></code> function with a single <strong>6x8j.pdb</strong> protein file and plot the result in a <code class="docutils literal notranslate"><span class="pre">scatter(x,y)</span></code> plot.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">phi</span><span class="p">,</span> <span class="n">psi</span> <span class="o">=</span> <span class="n">ramachandran</span><span class="p">(</span><span class="s1">&#39;6x8j.pdb&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">phi</span><span class="p">,</span> <span class="n">psi</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;phi $\phi$, degrees&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;psi $\psi$, degrees&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;psi $\\psi$, degrees&#39;)
+</pre></div>
+</div>
+<img alt="../../_images/03 Ramachandran_Plot_v8_22_1.png" src="../../_images/03 Ramachandran_Plot_v8_22_1.png" />
+</div>
+</div>
+</div>
+<div class="section" id="font-color-545aa7-4-ramachandran-plots-from-multiple-top8000-proteins-font">
+<h2><font color = 545AA7> 4. Ramachandran Plots from Multiple Top8000 Proteins </font><a class="headerlink" href="#font-color-545aa7-4-ramachandran-plots-from-multiple-top8000-proteins-font" title="Permalink to this headline">#</a></h2>
+<p>We will now collect data on a larger number of PDB files and plot the result. You have been provided a folder containing a few PDB files from the Top8000 dataset. Calculating the phi and psi angles for all 8000 often requires at least a few minutes of computer time, so for the sake of time, we will only work with a subset of this dataset. You can download the full dataset from <a class="reference external" href="http://kinemage.biochem.duke.edu/databases/top8000.php">http://kinemage.biochem.duke.edu/databases/top8000.php</a> if you wish to use the full dataset <em>at a later date</em>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="n">path</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">())</span>
+<span class="n">top80</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s1">&#39;Top80&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">phi_list</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">psi_list</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">top80</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">file</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;pdb&#39;</span><span class="p">):</span>
+        <span class="n">phi</span><span class="p">,</span> <span class="n">psi</span> <span class="o">=</span> <span class="n">ramachandran</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">top80</span><span class="p">,</span><span class="n">file</span><span class="p">))</span>
+        <span class="n">phi_list</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">phi</span><span class="p">)</span>
+        <span class="n">psi_list</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">psi</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">phi_list</span><span class="p">,</span> <span class="n">psi_list</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;phi $\phi$, degrees&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;psi $\psi$, degrees&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;psi $\\psi$, degrees&#39;)
+</pre></div>
+</div>
+<img alt="../../_images/03 Ramachandran_Plot_v8_26_1.png" src="../../_images/03 Ramachandran_Plot_v8_26_1.png" />
+</div>
+</div>
+<div class="section" id="font-color-545aa7-other-plotting-representations-font">
+<h3><font color = 545AA7> Other Plotting Representations </font><a class="headerlink" href="#font-color-545aa7-other-plotting-representations-font" title="Permalink to this headline">#</a></h3>
+<p>One issue with the scatter plot above is that it’s difficult to see any features inside the two large regions on the left side. Once there is a critical mass of dots in the scatter plot, it’s just a solid color. There are other plotting libraries and functions available to help. Along with the popular matplotlib library, there is the <a class="reference external" href="https://seaborn.pydata.org/">seaborn</a> Python plotting library that includes a selection of relatively simple to use plotting functions that can help.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">kdeplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">phi_list</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">psi_list</span><span class="p">,</span> <span class="n">cbar</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;phi $\phi$, degrees&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;psi $\psi$, degrees&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;frozen importlib._bootstrap&gt;:228: RuntimeWarning: scipy._lib.messagestream.MessageStream size changed, may indicate binary incompatibility. Expected 56 from C header, got 64 from PyObject
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;psi $\\psi$, degrees&#39;)
+</pre></div>
+</div>
+<img alt="../../_images/03 Ramachandran_Plot_v8_28_2.png" src="../../_images/03 Ramachandran_Plot_v8_28_2.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">jointplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">phi_list</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">psi_list</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.JointGrid at 0x7ffad3c7db50&gt;
+</pre></div>
+</div>
+<img alt="../../_images/03 Ramachandran_Plot_v8_29_1.png" src="../../_images/03 Ramachandran_Plot_v8_29_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">jointplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">phi_list</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">psi_list</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;kde&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.JointGrid at 0x7ffad53c0cd0&gt;
+</pre></div>
+</div>
+<img alt="../../_images/03 Ramachandran_Plot_v8_30_1.png" src="../../_images/03 Ramachandran_Plot_v8_30_1.png" />
+</div>
+</div>
+</div>
+<div class="section" id="font-color-f28500-practice-plotting-ramachandrans-plots-with-secondary-structure-font">
+<h3><font color = F28500> Practice: Plotting Ramachandrans Plots with Secondary Structure </font><a class="headerlink" href="#font-color-f28500-practice-plotting-ramachandrans-plots-with-secondary-structure-font" title="Permalink to this headline">#</a></h3>
+<p>For a little extra practice, let’s visualize how the presencen of helix and sheet <strong>secondary structures</strong> affects the phi and psi angles. Run the following two code cells to harvest a the phi and psi angles from your 80 protein dataset, but this time, it will also record if each amino acid residue is unstructured, in a helix, or in a sheet. <em>Note: helicies in this dataset are a mixture of <span class="math notranslate nohighlight">\(\alpha\)</span>-helicies or <span class="math notranslate nohighlight">\(3_{10}\)</span>-helicies</em></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_secondary_list</span><span class="p">(</span><span class="n">file</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;(string) -&gt; ([list], [list])</span>
+<span class="sd">    </span>
+<span class="sd">    Accepts a PDB file name (string) and returns two lists of residues</span>
+<span class="sd">    contained inside helicies and sheets, respetively. The residues are</span>
+<span class="sd">    strings containing the chain identifies and residue number</span>
+<span class="sd">    </span>
+<span class="sd">    &gt;&gt;&gt; (&#39;1abc.pdb&#39;) -&gt; [[&#39;A34&#39;, &#39;A35&#39;, &#39;A36&#39;], [&#39;A74&#39;, &#39;A75&#39;, &#39;A93&#39;, &#39;A94&#39;]] </span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    
+    <span class="n">alpha</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">three_ten</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">sheets</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;HELIX&#39;</span><span class="p">):</span>
+                <span class="n">chain</span> <span class="o">=</span> <span class="n">line</span><span class="p">[</span><span class="mi">19</span><span class="p">:</span><span class="mi">20</span><span class="p">]</span>
+                <span class="n">start</span> <span class="o">=</span> <span class="n">line</span><span class="p">[</span><span class="mi">21</span><span class="p">:</span><span class="mi">25</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+                <span class="n">stop</span> <span class="o">=</span> <span class="n">line</span><span class="p">[</span><span class="mi">33</span><span class="p">:</span><span class="mi">37</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+                
+                <span class="k">if</span> <span class="n">line</span><span class="p">[</span><span class="mi">39</span><span class="p">:</span><span class="mi">40</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;1&#39;</span><span class="p">:</span>
+                    <span class="k">for</span> <span class="n">res</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">start</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">stop</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+                        <span class="n">alpha</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">chain</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">res</span><span class="p">))</span>
+                <span class="k">if</span> <span class="n">line</span><span class="p">[</span><span class="mi">39</span><span class="p">:</span><span class="mi">40</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;5&#39;</span><span class="p">:</span>
+                    <span class="k">for</span> <span class="n">res</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">start</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">stop</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+                        <span class="n">three_ten</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">chain</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">res</span><span class="p">))</span>
+                    
+            <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;SHEET&#39;</span><span class="p">):</span>
+                <span class="n">chain</span> <span class="o">=</span> <span class="n">line</span><span class="p">[</span><span class="mi">21</span><span class="p">:</span><span class="mi">22</span><span class="p">]</span>
+                <span class="n">start</span> <span class="o">=</span> <span class="n">line</span><span class="p">[</span><span class="mi">22</span><span class="p">:</span><span class="mi">26</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+                <span class="n">stop</span> <span class="o">=</span> <span class="n">line</span><span class="p">[</span><span class="mi">33</span><span class="p">:</span><span class="mi">37</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+                
+                <span class="k">for</span> <span class="n">res</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">start</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">stop</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+                    <span class="n">sheets</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">chain</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">res</span><span class="p">))</span>
+                    
+    <span class="k">return</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">three_ten</span><span class="p">,</span> <span class="n">sheets</span>
+
+<span class="k">def</span> <span class="nf">get_phi_psi_sec_list</span><span class="p">(</span><span class="n">file</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Return list of absolute value omega dihedral angles in radians&quot;&quot;&quot;</span> 
+    
+    <span class="n">alpha</span><span class="p">,</span> <span class="n">three_ten</span><span class="p">,</span> <span class="n">beta</span> <span class="o">=</span> <span class="n">get_secondary_list</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+    
+    <span class="n">phi_psi_structure</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">Bio</span><span class="o">.</span><span class="n">PDB</span><span class="o">.</span><span class="n">PDBParser</span><span class="p">()</span>
+    <span class="n">structure</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">get_structure</span><span class="p">(</span><span class="s1">&#39;protein&#39;</span><span class="p">,</span> <span class="n">file</span><span class="p">)</span>
+    
+    <span class="k">for</span> <span class="n">chain</span> <span class="ow">in</span> <span class="n">structure</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+        <span class="c1"># get chain ID and residue numbers</span>
+        <span class="n">ID</span> <span class="o">=</span> <span class="n">chain</span><span class="o">.</span><span class="n">get_id</span><span class="p">()</span>
+        <span class="n">seq_ID</span> <span class="o">=</span> <span class="p">[</span><span class="n">residue</span><span class="o">.</span><span class="n">get_id</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">residue</span> <span class="ow">in</span> <span class="n">chain</span><span class="p">]</span>
+        
+        <span class="n">pp</span> <span class="o">=</span> <span class="n">Bio</span><span class="o">.</span><span class="n">PDB</span><span class="o">.</span><span class="n">PPBuilder</span><span class="p">()</span><span class="o">.</span><span class="n">build_peptides</span><span class="p">(</span><span class="n">chain</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        
+        <span class="k">for</span> <span class="n">res</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">pp</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="n">res_ID</span> <span class="o">=</span> <span class="n">ID</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">seq_ID</span><span class="p">[</span><span class="n">res</span><span class="p">])</span>
+            <span class="c1">#print(res_ID)</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="c1"># get vectors for this peptide and the N from the subsequent peptide</span>
+                
+                <span class="n">C_prev</span> <span class="o">=</span> <span class="n">pp</span><span class="p">[</span><span class="n">res</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="s1">&#39;C&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get_vector</span><span class="p">()</span>
+                <span class="n">CA</span> <span class="o">=</span> <span class="n">pp</span><span class="p">[</span><span class="n">res</span><span class="p">][</span><span class="s1">&#39;CA&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get_vector</span><span class="p">()</span>
+                <span class="n">C</span> <span class="o">=</span> <span class="n">pp</span><span class="p">[</span><span class="n">res</span><span class="p">][</span><span class="s1">&#39;C&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get_vector</span><span class="p">()</span>
+                <span class="n">N</span> <span class="o">=</span> <span class="n">pp</span><span class="p">[</span><span class="n">res</span><span class="p">][</span><span class="s1">&#39;N&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get_vector</span><span class="p">()</span>
+                <span class="n">N_next</span> <span class="o">=</span> <span class="n">pp</span><span class="p">[</span><span class="n">res</span> <span class="o">+</span> <span class="mi">1</span><span class="p">][</span><span class="s1">&#39;N&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get_vector</span><span class="p">()</span>
+                <span class="n">phi</span> <span class="o">=</span> <span class="n">calc_dihedral</span><span class="p">(</span><span class="n">C_prev</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">CA</span><span class="p">,</span> <span class="n">C</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">180</span> <span class="o">/</span> <span class="mf">3.14159</span><span class="p">)</span>
+                <span class="n">psi</span> <span class="o">=</span> <span class="n">calc_dihedral</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">CA</span><span class="p">,</span><span class="n">C</span><span class="p">,</span> <span class="n">N_next</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">180</span> <span class="o">/</span> <span class="mf">3.14159</span><span class="p">)</span>
+    
+                <span class="k">if</span> <span class="n">res_ID</span> <span class="ow">in</span> <span class="n">alpha</span><span class="p">:</span>
+                    <span class="n">structure</span> <span class="o">=</span> <span class="s1">&#39;alpha-helix&#39;</span>
+                <span class="k">elif</span> <span class="n">res_ID</span> <span class="ow">in</span> <span class="n">three_ten</span><span class="p">:</span>
+                    <span class="n">structure</span> <span class="o">=</span> <span class="s1">&#39;three_ten-helix&#39;</span>
+                <span class="k">elif</span> <span class="n">res_ID</span> <span class="ow">in</span> <span class="n">beta</span><span class="p">:</span>
+                    <span class="n">structure</span> <span class="o">=</span> <span class="s1">&#39;sheet&#39;</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">structure</span> <span class="o">=</span> <span class="s1">&#39;unstructured&#39;</span>
+                    
+                <span class="n">phi_psi_structure</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">phi</span><span class="p">,</span> <span class="n">psi</span><span class="p">,</span> <span class="n">structure</span><span class="p">])</span>
+
+                
+            <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Key Error!&#39;</span><span class="p">)</span>
+                
+        <span class="k">return</span> <span class="n">phi_psi_structure</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">phi_psi_sec</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="n">path</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">())</span>
+<span class="n">top80</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s1">&#39;Top80&#39;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">top80</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">file</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;pdb&#39;</span><span class="p">):</span>
+        <span class="n">phi_psi_sec</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">get_phi_psi_sec_list</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">top80</span><span class="p">,</span><span class="n">file</span><span class="p">)))</span>       
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">phi_psi_sec</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;phi&#39;</span><span class="p">,</span><span class="s1">&#39;psi&#39;</span><span class="p">,</span> <span class="s1">&#39;structure&#39;</span><span class="p">])</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>phi</th>
+      <th>psi</th>
+      <th>structure</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>-68.530484</td>
+      <td>125.694719</td>
+      <td>unstructured</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>80.751198</td>
+      <td>-9.201992</td>
+      <td>unstructured</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>-86.457910</td>
+      <td>125.645406</td>
+      <td>unstructured</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>-92.169453</td>
+      <td>124.810233</td>
+      <td>sheet</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>-92.425998</td>
+      <td>124.451491</td>
+      <td>sheet</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>10701</th>
+      <td>-156.491897</td>
+      <td>154.145583</td>
+      <td>sheet</td>
+    </tr>
+    <tr>
+      <th>10702</th>
+      <td>-81.622179</td>
+      <td>131.701232</td>
+      <td>sheet</td>
+    </tr>
+    <tr>
+      <th>10703</th>
+      <td>-135.036157</td>
+      <td>159.961719</td>
+      <td>sheet</td>
+    </tr>
+    <tr>
+      <th>10704</th>
+      <td>-123.924712</td>
+      <td>148.635385</td>
+      <td>sheet</td>
+    </tr>
+    <tr>
+      <th>10705</th>
+      <td>-104.225346</td>
+      <td>156.041438</td>
+      <td>unstructured</td>
+    </tr>
+  </tbody>
+</table>
+<p>10706 rows × 3 columns</p>
+</div></div></div>
+</div>
+<p>Now let’s plot the data using the <strong>seaborn</strong> plotting library which contains an assortment of ploting functions that produce more complex plots with relatively few lines of code.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;phi&#39;</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;psi&#39;</span><span class="p">],</span> <span class="n">hue</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;structure&#39;</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;phi&#39;, ylabel=&#39;psi&#39;&gt;
+</pre></div>
+</div>
+<img alt="../../_images/03 Ramachandran_Plot_v8_36_1.png" src="../../_images/03 Ramachandran_Plot_v8_36_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">jointplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;phi&#39;</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;psi&#39;</span><span class="p">],</span> <span class="n">hue</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;structure&#39;</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.JointGrid at 0x7ffad56dfb80&gt;
+</pre></div>
+</div>
+<img alt="../../_images/03 Ramachandran_Plot_v8_37_1.png" src="../../_images/03 Ramachandran_Plot_v8_37_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_alpha</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;structure&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;alpha-helix&#39;</span><span class="p">]</span>
+<span class="n">df_310</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;structure&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;three_ten-helix&#39;</span><span class="p">]</span>
+
+<span class="n">df_helix</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">((</span><span class="n">df_alpha</span><span class="p">,</span> <span class="n">df_310</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">jointplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">df_helix</span><span class="p">[</span><span class="s1">&#39;phi&#39;</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="n">df_helix</span><span class="p">[</span><span class="s1">&#39;psi&#39;</span><span class="p">],</span> <span class="n">hue</span><span class="o">=</span><span class="n">df_helix</span><span class="p">[</span><span class="s1">&#39;structure&#39;</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.JointGrid at 0x7ffad6a40a60&gt;
+</pre></div>
+</div>
+<img alt="../../_images/03 Ramachandran_Plot_v8_39_1.png" src="../../_images/03 Ramachandran_Plot_v8_39_1.png" />
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./VisTop8000_COMPLETE/03Ramachandran"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="../01PythonJupyter/01%20Jupyter_Python_Introduction_v7.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><font color = 545AA7> Introduction to Jupyter and Python </font></p>
+        </div>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Charles J. Weiss<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
