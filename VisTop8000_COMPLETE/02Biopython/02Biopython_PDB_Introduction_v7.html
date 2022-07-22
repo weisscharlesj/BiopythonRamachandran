@@ -118,7 +118,7 @@ const thebe_selector_output = ".output, .cell_output"
  <li class="toctree-l1">
   <a class="reference internal" href="../00Overview.html">
    <font color="545AA7">
-    Visualization of Top8000 Protein Dataset
+    Notebook 0: Visualization of Top8000 Protein Dataset
    </font>
   </a>
  </li>
@@ -559,7 +559,8 @@ title="Print to PDF"
 <div class="section" id="font-color-545aa7-1-download-a-pdb-file-font">
 <h2><font color = 545AA7> 1. Download a PDB File </font><a class="headerlink" href="#font-color-545aa7-1-download-a-pdb-file-font" title="Permalink to this headline">#</a></h2>
 <p>To  obtain protein structural data, the Protein Data Bank website at <a class="reference external" href="https://www.rcsb.org/">https://www.rcsb.org/</a> provides free access to protein cyrstal structures. To aquire a PDB file, go to this website, find the structure you’re looking for, and downnload it in the <strong>PDB Format</strong>. It is important to move the downloaded file into the folder with this Jupyter notebook. When Jupyter looks for a file, it looks in the same directory/folder as the Jupyter notebook unless told otherwise. For this activity, your data has already beend downloaded.</p>
-<img src="download_PDB.png" width="400"></div>
+<p><img alt="" src="../../_images/download_PDB.png" /></p>
+</div>
 <div class="section" id="font-color-545aa7-2-pdb-format-and-parsing-font">
 <h2><font color = 545AA7> 2. PDB Format and Parsing </font><a class="headerlink" href="#font-color-545aa7-2-pdb-format-and-parsing-font" title="Permalink to this headline">#</a></h2>
 <p>While some other bioinformatics file formats online include mainly sequence data, the PDB file format provides an assortmet of information including:</p>
@@ -964,7 +965,8 @@ title="Print to PDF"
 <div class="section" id="font-color-545aa7-6-examining-beta-sheets-font">
 <h2><font color = 545AA7> 6. Examining <span class="math notranslate nohighlight">\(\beta\)</span>-Sheets </font><a class="headerlink" href="#font-color-545aa7-6-examining-beta-sheets-font" title="Permalink to this headline">#</a></h2>
 <p>The <span class="math notranslate nohighlight">\(\beta\)</span>-sheets in proteins consist of amino acid strands that may or may not be adjacent to each other in a peptide strand, and the adjacent strands in a <span class="math notranslate nohighlight">\(\beta\)</span>-sheet may be parallel or anti-parallel. PDB files contain information as to the direction of the strands by marking a segment of a <span class="math notranslate nohighlight">\(\beta\)</span>-sheet as <code class="docutils literal notranslate"><span class="pre">0</span></code> if is is the first segment of a sheet, <code class="docutils literal notranslate"><span class="pre">1</span></code> if a segment is parallel with the previous segment in the sheet, and <code class="docutils literal notranslate"><span class="pre">-1</span></code> is a segment is anti-parallel with a previous segment of a <span class="math notranslate nohighlight">\(\beta\)</span>-sheet.</p>
-<img src="5CPA_public_domain_image.png" width="300"><p>The following code creates a function called <code class="docutils literal notranslate"><span class="pre">get_sheet_direction()</span></code> to harvest the relationship of each strand with the previous one in the <span class="math notranslate nohighlight">\(\beta\)</span>-sheets. The next code block</p>
+<p><img alt="" src="../../_images/5CPA_public_domain_image.png" /></p>
+<p>The following code creates a function called <code class="docutils literal notranslate"><span class="pre">get_sheet_direction()</span></code> to harvest the relationship of each strand with the previous one in the <span class="math notranslate nohighlight">\(\beta\)</span>-sheets. The next code block</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_sheet_direction</span><span class="p">(</span><span class="n">file</span><span class="p">):</span>
