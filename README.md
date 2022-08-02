@@ -15,4 +15,4 @@ This activity only uses a small subset from the Top8000 dataset, included below,
 
 [Download All Files as Zip](VisTop8000.zip)
 
-[Download Completed Jupyter Notebooks](VisTop8000_Complete.zip)
+[Download Completed Jupyter Notebooks](VisTop8000_COMPLETE.zip)
