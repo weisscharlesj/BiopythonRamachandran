@@ -16,3 +16,5 @@ This activity only uses a small subset from the Top8000 dataset, included below,
 [Download All Files as Zip](VisTop8000.zip)
 
 [Download Completed Jupyter Notebooks](VisTop8000_COMPLETE.zip)
+
+For resources on learning to program in Python for chemists and working with Biopython, see the free book [Scientific Computing for Chemists with Python](https://weisscharlesj.github.io/SciCompforChemists/notebooks/introduction/intro.html) including chapter 16 on bioinformatics.
